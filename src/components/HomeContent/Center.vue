@@ -1,5 +1,5 @@
 <template>
-    <div class="center-content float-left">
+    <div class="center-content float-left" v-loading="isContentLoading">
         <ul class="content-box">
             <li class="content-item clear-fix" v-for="(item, index) of data" :key="index">
                 <div class="cover float-left">
@@ -22,16 +22,24 @@
                 </div>
             </li>
         </ul>
+        <div class="loading" v-show="isLoading" v-loading="isLoading">
+
+        </div>
     </div>
 </template>
 
 <script>
-import { to2Bit, openUrl } from '../../libs/utils';
+import { setMinHeight, to2Bit, openUrl } from '../../libs/utils';
 
 export default {
     name: 'CenterContent',
     props: {
-        data: Array
+        data: Array,
+        isContentLoading: Array,
+        isLoading: Boolean
+    },
+    mounted() {
+        setMinHeight('.center-content')
     },
     methods: {
         to2Bit,
@@ -43,7 +51,7 @@ export default {
 <style lang="scss">
 .center-content {
     width: 710px;
-    margin: 0 20px 10px 120px;
+    margin: 0 20px 0 120px;
     
     .content-item {
         height: 180px;
@@ -93,6 +101,9 @@ export default {
                 top: 140px;
             }
         }
+    }
+    .loading {
+        height: 100px;
     }
 }
 </style>

@@ -15,21 +15,6 @@ export default {
     name: 'RightContent',
     props: {
         data: Array
-    },
-    mounted() {
-        window.addEventListener('scroll', this.onScroll, false);
-    },
-    methods: {
-        onScroll() {
-            let oBox = document.querySelector('.right-content'),
-                dy = document.documentElement.scrollTop;
-
-            if (dy >= 80) {
-                oBox.style.top = '10px';
-            } else {
-                oBox.style.top = (80 - dy) + 'px';
-            }
-        }
     }
 }
 </script>

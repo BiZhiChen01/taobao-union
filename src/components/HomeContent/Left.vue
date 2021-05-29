@@ -19,9 +19,6 @@ export default {
     props: {
         data: Array
     },
-    mounted() {
-        window.addEventListener('scroll', this.onScroll, false);
-    },
     data() {
         return {
             curIdx: 0
@@ -34,16 +31,6 @@ export default {
         },
         goToTop() {
             window.scroll(0, 0);
-        },
-        onScroll() {
-            let oBox = document.querySelector('.left-content'),
-                dy = document.documentElement.scrollTop;
-
-            if (dy >= 80) {
-                oBox.style.top = '10px';
-            } else {
-                oBox.style.top = (80 - dy) + 'px';
-            }
         }
     }
 }
@@ -52,7 +39,6 @@ export default {
 <style lang="scss">
 .left-content {
     position: fixed;
-    
 
     .content-list {
         background-color: #fff;
