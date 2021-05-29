@@ -22,6 +22,7 @@ export default {
     methods: {
         changType(id) {
             this.curIdx = this.data.findIndex(item => item.id === id);
+            this.$store.state.homeCategoryId = id;
         }
     }
 }

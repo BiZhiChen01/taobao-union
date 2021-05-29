@@ -3,6 +3,11 @@ function setMinHeight(el) {
     oBox.style.minHeight = (document.documentElement.clientHeight - 70) + 'px';
 }
 
+function to2Bit(num) {
+    return num.toFixed(2);
+}
+
 export {
-    setMinHeight
+    setMinHeight,
+    to2Bit
 }

@@ -1,3 +1,4 @@
 export default {
-    headerTabCurrent: 'home'
+    headerTabCurrent: 'home',
+    homeCategoryId: ''
 }

@@ -7,5 +7,8 @@ export default {
     SUCCESS_CODE,
     getCategories() {
         return request.requestGet(BASE_URL + '/discovery/categories');
+    },
+    getCategoryContent(materialId, page) {
+        return request.requestGet(BASE_URL + "/discovery/" + materialId + "/" + page);
     }
 }

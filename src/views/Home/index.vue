@@ -2,7 +2,7 @@
     <div class="home">
         <div class="container">
             <left-content :data="leftData"></left-content>
-            <center-content></center-content>
+            <center-content :data="centerData"></center-content>
             <right-content></right-content>
         </div>
     </div>
@@ -28,10 +28,13 @@ export default {
         setMinHeight('.home');
 
         await this.getCategories();
+        this.getCategoryContent(this.leftData[0].id, this.page);
     },
     data() {
         return {
-            leftData: []
+            leftData: [],
+            page: 0,
+            centerData: []
         }
     },
     methods: {
@@ -40,6 +43,24 @@ export default {
             if (result.data.code === api.SUCCESS_CODE) {
                 this.leftData = result.data.data;
             }
+        },
+        async getCategoryContent(materialId, page) {
+            const result = await api.getCategoryContent(materialId, page);
+            if (result.data.code === api.SUCCESS_CODE) {
+                this.centerData = result.data.data;
+                console.log(this.centerData);
+            }
+        }
+    },
+    computed: {
+        materialId() {
+            return this.$store.state.homeCategoryId;
+        }
+    },
+    watch: {
+        materialId(newMaterialId, oldMaterialId) {
+            this.page = 0;
+            this.getCategoryContent(newMaterialId, this.page);
         }
     }
 }
