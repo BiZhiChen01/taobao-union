@@ -32,8 +32,10 @@ export default {
         await this.getCategoryContent(this.leftData[0].id, this.page);
         this.rightData = this.centerData.slice(0, 3);
 
-        window.addEventListener('scroll', this.onScroll, false);
+        window.addEventListener('scroll', this.onScroll);
         window.addEventListener('scroll', scrollToBottom.bind(this, this.MoreLoading), false);
+
+        this.onScroll();
     },
     data() {
         return {
@@ -69,12 +71,12 @@ export default {
                 oRightBox = document.querySelector('.right-content'),
                 dy = document.documentElement.scrollTop;
 
-            if (dy >= 80) {
+            if (dy >= 90) {
                 oLeftBox.style.top = '10px';
                 oRightBox.style.top = '10px';
             } else {
-                oLeftBox.style.top = (80 - dy) + 'px';
-                oRightBox.style.top = (80 - dy) + 'px';
+                oLeftBox.style.top = (90 - dy) + 'px';
+                oRightBox.style.top = (90 - dy) + 'px';
             }
         },
         async MoreLoading() {
@@ -109,7 +111,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
+.container {
     margin-top: 20px;
 }
 </style>

@@ -35,7 +35,7 @@ export default {
     name: 'CenterContent',
     props: {
         data: Array,
-        isContentLoading: Array,
+        isContentLoading: Boolean,
         isLoading: Boolean
     },
     mounted() {
