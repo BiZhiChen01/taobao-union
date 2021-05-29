@@ -17,7 +17,7 @@
                     {{ item.title }}
                 </div>
             </div>
-            <div class="loading clear-fix" v-show="this.$parent.hasMore" v-loading="isLoading">
+            <div class="loading clear-fix" v-show="hasMore" v-loading="isLoading">
 
             </div>
         </div>
@@ -31,7 +31,8 @@ export default {
     name: 'OnSellHeight',
     props: {
         data: Array,
-        isLoading: Boolean
+        isLoading: Boolean,
+        hasMore: Boolean
     },
     mounted() {
         setMinHeight('.on-sell-list');

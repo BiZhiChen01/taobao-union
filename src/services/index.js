@@ -19,5 +19,8 @@ export default {
     },
     getOnSellContent(page) {
         return request.requestGet(BASE_URL + "/onSell/" + page);
+    },
+    getSearch(keyword, page) {
+        return request.requestGet(BASE_URL + "/search?keyword=" + keyword + "&page=" + page);
     }
 }

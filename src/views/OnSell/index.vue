@@ -1,7 +1,7 @@
 <template>
     <div class="onSell" v-loading="isMainLoading">
         <div class="container">
-            <on-sell-list :data="onSellData" :isLoading="isLoading"></on-sell-list>
+            <on-sell-list :data="onSellData" :isLoading="isLoading" :hasMore="hasMore"></on-sell-list>
         </div>
     </div>
 </template>

@@ -1,17 +1,33 @@
 <template>
     <div class="header-search float-right">
         <div class="serrch-input float-left">
-            <el-input placeholder="复制（淘宝的标题或者关键字）找优惠券!" size="small"></el-input>
+            <el-input v-model="keyword" placeholder="复制（淘宝的标题或者关键字）找优惠券!" size="small"></el-input>
         </div>
         <div class="search-btn float-left">
-            <el-button type="danger" size="small">搜索</el-button>
+            <el-button type="danger" size="small" @click="doSearch">搜索</el-button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'HeaderSearch'
+    name: 'HeaderSearch',
+    data() {
+        return {
+            keyword: ''
+        }
+    },
+    methods: {
+        doSearch() {
+            this.$store.state.searchKeyword = this.keyword;
+            this.$router.push({
+                name: 'search',
+                query: {
+                    keyword: this.keyword
+                }
+            });
+        }
+    }
 }
 </script>
 
