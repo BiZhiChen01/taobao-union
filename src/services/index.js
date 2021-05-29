@@ -16,5 +16,8 @@ export default {
     },
     getRecommendContent(categoryId) {
         return request.requestGet(BASE_URL + "/recommend/" + categoryId);
+    },
+    getOnSellContent(page) {
+        return request.requestGet(BASE_URL + "/onSell/" + page);
     }
 }
