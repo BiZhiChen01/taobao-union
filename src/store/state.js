@@ -1,4 +1,6 @@
 export default {
     headerTabCurrent: 'home',
-    homeCategoryId: ''
+    homeCategoryId: '',
+    navFavoritesId: '',
+    navFavoritesTitle: ''
 }

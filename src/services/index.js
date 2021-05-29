@@ -10,5 +10,11 @@ export default {
     },
     getCategoryContent(materialId, page) {
         return request.requestGet(BASE_URL + "/discovery/" + materialId + "/" + page);
+    },
+    getRecommendCategory() {
+        return request.requestGet(BASE_URL + "/recommend/categories");
+    },
+    getRecommendContent(categoryId) {
+        return request.requestGet(BASE_URL + "/recommend/" + categoryId);
     }
 }
