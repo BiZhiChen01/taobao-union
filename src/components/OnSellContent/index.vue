@@ -17,6 +17,9 @@
                     {{ item.title }}
                 </div>
             </div>
+            <div class="loading clear-fix" v-show="this.$parent.hasMore" v-loading="isLoading">
+
+            </div>
         </div>
     </div>
 </template>
@@ -27,7 +30,8 @@ import { setMinHeight, to2Bit, openUrl } from '../../libs/utils';
 export default {
     name: 'OnSellHeight',
     props: {
-        data: Array
+        data: Array,
+        isLoading: Boolean
     },
     mounted() {
         setMinHeight('.on-sell-list');
@@ -62,7 +66,7 @@ export default {
                     text-align: center;
                     background: #c9302c;
                     color: #fff;
-                    }
+                }
             }
             .price {
                 margin: 15px 0;
@@ -93,6 +97,9 @@ export default {
             &:hover {
                 border: 1px solid #c9302c;
             }
+        }
+        .loading {
+            height: 150px;
         }
     }
 }
