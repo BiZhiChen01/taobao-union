@@ -18,9 +18,14 @@ export default {
         SearchList
     },
     async mounted() {
+        this.$store.commit('setHeaderTabActive', '');
         setMinHeight('.container');
 
-        await this.getSearch(this.$route.query.keyword, this.page)
+        if (this.$route.query.keyword !== undefined) {
+            this.$store.state.searchKeyword = this.$route.query.keyword;
+        }
+
+        await this.getSearch(this.$route.query.keyword, this.page);
     },
     data() {
         return {
@@ -34,7 +39,6 @@ export default {
         async getSearch(keyword, page) {
             const result = await api.getSearch(keyword, page);
             if (result.data.code === api.SUCCESS_CODE) {
-                console.log(result);
                 this.searchData = result.data.data.tbk_dg_material_optional_response.result_list.map_data;
             }
         }

@@ -1,7 +1,7 @@
 <template>
     <div class="header-search float-right">
         <div class="serrch-input float-left">
-            <el-input v-model="keyword" placeholder="复制（淘宝的标题或者关键字）找优惠券!" size="small"></el-input>
+            <el-input v-model="keyword" placeholder="复制（淘宝的标题或者关键字）找优惠券!" size="small" @keypress.enter.native="doSearch"></el-input>
         </div>
         <div class="search-btn float-left">
             <el-button type="danger" size="small" @click="doSearch">搜索</el-button>
@@ -26,6 +26,16 @@ export default {
                     keyword: this.keyword
                 }
             });
+        }
+    },
+    computed: {
+        searchKeyword() {
+            return this.$store.state.searchKeyword;
+        }
+    },
+    watch: {
+        searchKeyword(newVal, oldVal) {
+            this.keyword = newVal;
         }
     }
 }
