@@ -7,7 +7,12 @@ function to2Bit(num) {
     return num.toFixed(2);
 }
 
+function openUrl(url) {
+    window.open(url);
+}
+
 export {
     setMinHeight,
-    to2Bit
+    to2Bit,
+    openUrl
 }

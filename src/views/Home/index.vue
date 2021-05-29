@@ -3,7 +3,7 @@
         <div class="container">
             <left-content :data="leftData"></left-content>
             <center-content :data="centerData"></center-content>
-            <right-content></right-content>
+            <right-content :data="rightData"></right-content>
         </div>
     </div>
 </template>
@@ -28,13 +28,15 @@ export default {
         setMinHeight('.home');
 
         await this.getCategories();
-        this.getCategoryContent(this.leftData[0].id, this.page);
+        await this.getCategoryContent(this.leftData[0].id, this.page);
+        this.rightData = this.centerData.slice(0, 3);
     },
     data() {
         return {
             leftData: [],
             page: 0,
-            centerData: []
+            centerData: [],
+            rightData: []
         }
     },
     methods: {
@@ -48,7 +50,6 @@ export default {
             const result = await api.getCategoryContent(materialId, page);
             if (result.data.code === api.SUCCESS_CODE) {
                 this.centerData = result.data.data;
-                console.log(this.centerData);
             }
         }
     },

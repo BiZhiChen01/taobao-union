@@ -1,15 +1,45 @@
 <template>
     <div class="right-content float-left">
-        右边
+        <el-carousel>
+            <el-carousel-item v-for="(item, index) in data" :key="index">
+                <a :href="item.coupon_click_url" target="_blank">
+                    <el-image style="width: 290px height: 290px" :src="item.pict_url" fit="cover"></el-image>
+                </a>
+            </el-carousel-item>
+        </el-carousel>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'RightContent'
+    name: 'RightContent',
+    props: {
+        data: Array
+    },
+    mounted() {
+        window.addEventListener('scroll', this.onScroll, false);
+    },
+    methods: {
+        onScroll() {
+            let oBox = document.querySelector('.right-content'),
+                dy = document.documentElement.scrollTop;
+
+            if (dy >= 80) {
+                oBox.style.top = '10px';
+            } else {
+                oBox.style.top = (80 - dy) + 'px';
+            }
+        }
+    }
 }
 </script>
 
 <style lang="scss">
-
+.right-content {
+    position: fixed;
+    width: 290px;
+    height: 290px;
+    margin: 0 5px 0 850px;
+    box-shadow: 0 5px 10px #d4d4d4;
+}
 </style>

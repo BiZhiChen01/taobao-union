@@ -16,7 +16,7 @@
                     <div class="sell">
                         <span>{{ item.volume }}&nbsp;·&nbsp;人已购买</span>
                     </div>
-                    <div class="buy-btn">
+                    <div class="buy-btn" @click="openUrl(item.coupon_click_url)">
                         <el-button type="danger">领券购买</el-button>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { to2Bit } from '../../libs/utils';
+import { to2Bit, openUrl } from '../../libs/utils';
 
 export default {
     name: 'CenterContent',
@@ -34,7 +34,8 @@ export default {
         data: Array
     },
     methods: {
-        to2Bit
+        to2Bit,
+        openUrl
     }
 }
 </script>
@@ -42,7 +43,7 @@ export default {
 <style lang="scss">
 .center-content {
     width: 710px;
-    margin: 0 20px 10px;
+    margin: 0 20px 10px 120px;
     
     .content-item {
         height: 180px;
