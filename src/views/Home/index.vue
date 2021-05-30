@@ -33,7 +33,7 @@ export default {
         this.rightData = this.centerData.slice(0, 3);
 
         window.addEventListener('scroll', this.onScroll);
-        window.addEventListener('scroll', scrollToBottom.bind(this, this.MoreLoading), false);
+        window.addEventListener('scroll', scrollToBottom.bind(this, this.onMoreLoading), false);
 
         this.onScroll();
     },
@@ -46,7 +46,7 @@ export default {
             isMainLoading: false,
             isContentLoading: false,
             isLoading: false,
-            isMoreLoading: true
+            hasMore: true
         }
     },
     methods: {
@@ -79,19 +79,32 @@ export default {
                 oRightBox.style.top = (90 - dy) + 'px';
             }
         },
-        async MoreLoading() {
-            if (!this.isLoading && this.isMoreLoading) {
+        onMoreLoading() {
+            if (!this.isLoading && this.hasMore) {
                 this.isLoading = true;
-                this.isMoreLoading = false;
                 this.page ++;
-                const result = await api.getCategoryContent(this.$store.state.homeCategoryId, this.page);
-                if (result.data.code === api.SUCCESS_CODE) {
-                    this.centerData = this.centerData.concat(result.data.data);
-                } else {
-                    this.page --;
-                }
-                this.isLoading = false;
-                this.isMoreLoading = true;
+                api.getCategoryContent(this.$store.state.homeCategoryId, this.page).then(result => {
+                    if (result.data.code === api.SUCCESS_CODE) {
+                        this.centerData = this.centerData.concat(result.data.data);
+                    } else {
+                        this.page --;
+                        this.$message({
+                            message: result.data.code,
+                            type: 'error'
+                        });
+                    }
+                    this.isLoading = false;
+                }).catch(error => {
+                    if (error.response.status === 500) {
+                        this.isLoading = false;
+                        this.hasMore = false;
+                        this.$message({
+                            message: '没有更多数据了...',
+                            type: 'warning',
+                            center: true
+                        });
+                    }
+                });
             }
         }
     },
