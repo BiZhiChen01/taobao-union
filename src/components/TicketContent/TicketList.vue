@@ -7,6 +7,7 @@
             <div class="content-item float-left" v-for="(item, index) of data" :key="index">
                 <div class="cover">
                     <el-image style="width: 240px; height: 240px" :src="item.pict_url + '_240x240xzq90.jpg_.webp'" fit="cover"></el-image>
+                    <span class="coupon_info" v-show="item.coupon_click_url !== null">{{ item.coupon_info }}</span>
                 </div>
                 <h1 class="title" @click="openUrl(item.coupon_click_url !== null ? item.coupon_click_url : item.click_url)">
                     {{ item.title }}
@@ -62,7 +63,19 @@ export default {
             box-shadow: 0 5px 10px #d4d4d4;
 
             .cover {
+                position: relative;
 
+                .coupon_info {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    padding: 10px 15px;
+                    font-size: 14px;
+                    color: #fff;
+                    border-top-left-radius: 8px;
+                    border-bottom-left-radius: 8px;
+                    background-color: #c9302c;
+                }
             }
             .title {
                 margin: 10px 0;
