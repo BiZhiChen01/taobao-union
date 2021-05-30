@@ -1,14 +1,14 @@
 <template>
     <div class="search" v-loading="isMainLoading">
         <div class="container">
-            <search-list :data="searchData" :loading="isMainLoading" :hasMore="hasMore"></search-list>
+            <search-list :data="searchData" :isLoading="isLoading" :hasMore="hasMore"></search-list>
         </div>
     </div>
 </template>
 
 <script>
 import api from '../../services';
-import { setMinHeight } from '../../libs/utils';
+import { setMinHeight, scrollToBottom } from '../../libs/utils';
 
 import SearchList from '../../components/OnSellContent';
 
@@ -26,20 +26,57 @@ export default {
         }
 
         await this.getSearch(this.$route.query.keyword, this.page);
+
+        window.addEventListener('scroll', scrollToBottom.bind(this, this.onMoreLoading), false);
     },
     data() {
         return {
             page: 0,
             searchData: [],
             isMainLoading: false,
+            isLoading: false,
             hasMore: true
         }
     },
     methods: {
         async getSearch(keyword, page) {
+            this.isMainLoading = true;
             const result = await api.getSearch(keyword, page);
             if (result.data.code === api.SUCCESS_CODE) {
-                this.searchData = result.data.data.tbk_dg_material_optional_response.result_list.map_data;
+                if (result.data.data.tbk_dg_material_optional_response === null) {
+                    this.hasMore = false;
+                    this.$message({
+                        message: '没有查询到此商品...',
+                        type: 'warning',
+                        center: true
+                    });
+                } else {
+                    this.searchData = result.data.data.tbk_dg_material_optional_response.result_list.map_data;
+                }
+            }
+            this.isMainLoading = false;
+        },
+        onMoreLoading() {
+            if (!this.isLoading && this.hasMore) {
+                this.isLoading = true;
+                this.page ++;
+                api.getSearch(this.$route.query.keyword, this.page).then(result => {
+                    if (result.data.code === api.SUCCESS_CODE) {
+                        if (result.data.data.tbk_dg_material_optional_response === null) {
+                            this.hasMore = false;
+                            this.$message({
+                                message: '没有更多数据了...',
+                                type: 'warning',
+                                center: true
+                            });
+                        } else {
+                            this.searchData = this.searchData.concat(result.data.data.tbk_dg_material_optional_response.result_list.map_data);
+                        }
+                    }
+                    this.isLoading = false;
+                }).catch(error => {
+                    console.log(error);
+                });
             }
         }
     },
