@@ -7,13 +7,15 @@
                 </div>
             </div>
         </div>
-        <div class="back-top" @click="goToTop">
+        <div class="back-top" @click="scrollGoTop">
             <span class="el-icon-upload2"></span>
         </div>
     </div>
 </template>
 
 <script>
+import { scrollGoTop } from '../../libs/utils';
+
 export default {
     name: 'LeftContent',
     props: {
@@ -25,12 +27,11 @@ export default {
         }
     },
     methods: {
+        scrollGoTop,
         changType(id) {
+            this.scrollGoTop();
             this.curIdx = this.data.findIndex(item => item.id === id);
             this.$store.state.homeCategoryId = id;
-        },
-        goToTop() {
-            window.scroll(0, 0);
         }
     }
 }

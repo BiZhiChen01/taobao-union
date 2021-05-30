@@ -11,6 +11,10 @@ function openUrl(url) {
     window.open(url);
 }
 
+function scrollGoTop() {
+    window.scroll(0, 0);
+}
+
 function scrollToBottom(callback) {
     let height = Math.round(_getScrollTop() + _getWindowHeight());
     if (height === _getScrollHeight() - 150 || height >= _getScrollHeight() - 150) {
@@ -22,6 +26,7 @@ export {
     setMinHeight,
     to2Bit,
     openUrl,
+    scrollGoTop,
     scrollToBottom
 }
 

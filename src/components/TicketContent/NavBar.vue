@@ -3,7 +3,7 @@
         <div :class="curIdx === index ? 'item active' : 'item'" v-for="(item, index) of data" :key="index" @click="changeType(item.favorites_id)">
             {{ item.favorites_title }}
         </div>
-        <div class="back-top float-right" @click="goToTop">
+        <div class="back-top float-right" @click="scrollGoTop">
             <span class="el-icon-upload2"></span>
         </div>
         <span class="line" :style="{left: lineLeft}"></span>
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { scrollGoTop } from '../../libs/utils';
+
 export default {
     name: 'NavBar',
     props: {
@@ -23,14 +25,13 @@ export default {
         }
     },
     methods: {
+        scrollGoTop,
         changeType(id) {
+            this.scrollGoTop();
             this.curIdx = this.data.findIndex(item => item.favorites_id === id);
             this.lineLeft = this.curIdx * 100 + 'px';
             this.$store.state.navFavoritesId = id;
             this.$store.state.navFavoritesTitle = this.data[this.curIdx].favorites_title.split('').join("<em>/</em>");
-        },
-        goToTop() {
-            window.scroll(0, 0);
         }
     }
 }
