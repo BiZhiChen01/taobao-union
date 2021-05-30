@@ -1,9 +1,9 @@
 <template>
     <div class="on-sell-list">
         <div class="content-box">
-            <div class="content-item float-left" v-for="(item, index) of data" :key="index" @click="openUrl(item.coupon_click_url || item.coupon_share_url)">
+            <div class="content-item float-left" v-for="(item, index) of data" :key="index" @click="openUrl(item.coupon_click_url ? 'https:'+item.coupon_click_url : (item.coupon_share_url ? 'https:'+item.coupon_share_url : item.item_url))">
                 <div class="cover">
-                    <el-image style="width: 263px; height: 263px" :src="item.pict_url" fit="cover"></el-image>
+                    <el-image style="width: 263px; height: 263px" :src="item.pict_url.indexOf('https:') ? 'https:'+item.pict_url : item.pict_url" fit="cover"></el-image>
                     <span class="coupon-amount" v-show="item.coupon_amount">省&nbsp;{{ item.coupon_amount }}&nbsp;元</span>
                 </div>
                 <div class="price">

@@ -2,8 +2,8 @@
     <div class="right-content float-left">
         <el-carousel>
             <el-carousel-item v-for="(item, index) in data" :key="index">
-                <a :href="item.coupon_click_url" target="_blank">
-                    <el-image style="width: 290px height: 290px" :src="item.pict_url" fit="cover"></el-image>
+                <a :href="'https:' + item.coupon_click_url" target="_blank">
+                    <el-image style="width: 290px height: 290px" :src="'https:' + item.pict_url" fit="cover"></el-image>
                 </a>
             </el-carousel-item>
         </el-carousel>

@@ -42,7 +42,7 @@ export default {
         async getSearch(keyword, page) {
             this.isMainLoading = true;
             const result = await api.getSearch(keyword, page);
-            if (result.data.code === api.SUCCESS_CODE) {
+            if (result.data.code === api.SUCCESS_CODE) {console.log(result.data.data.tbk_dg_material_optional_response.result_list.map_data);
                 if (result.data.data.tbk_dg_material_optional_response === null) {
                     this.hasMore = false;
                     this.$message({

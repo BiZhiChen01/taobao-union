@@ -59,10 +59,13 @@ export default {
         onScroll() {
             const navBar = document.querySelector('.nav-bar'),
                   dy = document.documentElement.scrollTop;
-            if (90 > dy) {
-                navBar.style.top = (90 - dy) + 'px'
-            } else {
-                navBar.style.top = '10px';
+            
+            if (navBar) {
+                if (90 > dy) {
+                    navBar.style.top = (90 - dy) + 'px'
+                } else {
+                    navBar.style.top = '10px';
+                }
             }
         }
     },

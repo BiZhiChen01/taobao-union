@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath: './',
     devServer: {
         overlay: {
             wranings: false,

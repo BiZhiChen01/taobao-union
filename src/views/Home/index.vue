@@ -71,12 +71,14 @@ export default {
                 oRightBox = document.querySelector('.right-content'),
                 dy = document.documentElement.scrollTop;
 
-            if (dy >= 90) {
+            if (oLeftBox && oRightBox) {
+                if (dy >= 90) {
                 oLeftBox.style.top = '10px';
                 oRightBox.style.top = '10px';
-            } else {
-                oLeftBox.style.top = (90 - dy) + 'px';
-                oRightBox.style.top = (90 - dy) + 'px';
+                } else {
+                    oLeftBox.style.top = (90 - dy) + 'px';
+                    oRightBox.style.top = (90 - dy) + 'px';
+                }
             }
         },
         onMoreLoading() {

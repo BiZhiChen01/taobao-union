@@ -3,11 +3,11 @@
         <ul class="content-box">
             <li class="content-item clear-fix" v-for="(item, index) of data" :key="index">
                 <div class="cover float-left">
-                    <el-image style="width: 180px; height: 180px" :src="item.pict_url + '_180x180xzq90.jpg_.webp'" fit="cover"></el-image>
+                    <el-image style="width: 180px; height: 180px" :src="'https:' + item.pict_url + '_180x180xzq90.jpg_.webp'" fit="cover"></el-image>
                 </div>
                 <div class="info float-left">
                     <div class="title">
-                        <a :href="item.coupon_click_url" target="_blank">{{ item.title }}</a>
+                        <a :href="'https:' + item.coupon_click_url" target="_blank">{{ item.title }}</a>
                     </div>
                     <div class="price">
                         <span>原价：{{ item.zk_final_price }}</span>
@@ -16,7 +16,7 @@
                     <div class="sell">
                         <span>{{ item.volume }}&nbsp;·&nbsp;人已购买</span>
                     </div>
-                    <div class="buy-btn" @click="openUrl(item.coupon_click_url)">
+                    <div class="buy-btn" @click="openUrl('https:' + item.coupon_click_url)">
                         <el-button type="danger">领券购买</el-button>
                     </div>
                 </div>
