@@ -12,6 +12,13 @@ import './assets/styles/common.css';
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
+});
+
 new Vue({
   router,
   store,

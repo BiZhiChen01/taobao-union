@@ -9,22 +9,34 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: {
+      title: '领券联盟'
+    }
   },
   {
     path: '/ticket',
     name: 'ticket',
-    component: () => import('../views/Ticket')
+    component: () => import('../views/Ticket'),
+    meta: {
+      title: '领券联盟'
+    }
   },
   {
     path: '/onSell',
     name: 'onSell',
-    component: () => import('../views/OnSell')
+    component: () => import('../views/OnSell'),
+    meta: {
+      title: '领券联盟'
+    }
   },
   {
     path: '/search',
     name: 'search',
-    component: () => import('../views/Search')
+    component: () => import('../views/Search'),
+    meta: {
+      title: '领券联盟'
+    }
   }
 ]
 
